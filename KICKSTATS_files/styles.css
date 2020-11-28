@@ -13,6 +13,8 @@ animation: fadein 2s;
 
 }
 
+
+
 @keyframes fadein {
     from {
         opacity:0;
@@ -188,6 +190,7 @@ h4 {
   width: 808px;
   height: 270px;
     margin: auto;
+
 }
 .comparison1 {
 border: 1px solid #b0b0b0;
@@ -196,7 +199,8 @@ margin-left: 150px;
   height: auto;
   background-color: #fff;
       width: 350px;
-      float:left;
+ position: relative;
+      z-index: 5 !important;
 
   -webkit-transition:all .5s ease-out;
   -moz-transition:all .5s ease-out;
@@ -214,7 +218,7 @@ margin-left: 150px;
   position: absolute;
   display:none;
     height: auto;
-
+    z-index: 0;
 
 }
 #toggle_data {
@@ -222,10 +226,10 @@ border: 1px solid #b0b0b0;
   padding: 25px;
   background-color: #fff;
   width: 50px;
+  z-index: 5;
 
-  float: left;
   display: block;
-  cursor: pointer;
+
    position: relative;
 
 
@@ -244,11 +248,11 @@ border: 1px solid #b0b0b0;
 border: 1px solid #b0b0b0;
   padding: 25px;
   background-color: #fff;
-  width: 50px;
 
-  margin-left: 551.5px;
+
+  margin-left: 230.5px;
   display: block;
-  cursor: pointer;
+  z-index: 0;
    position: absolute;
 
 
@@ -270,7 +274,7 @@ border: 1px solid #b0b0b0;
 }
 
 .flex-container {
-  
+  z-index: 0;
   display: flex;
   flex-wrap: nowrap;
     width: 100px;
@@ -279,24 +283,54 @@ border: 1px solid #b0b0b0;
 
 }
 
-#comp2{
+#comp1{
+z-index: 5;
+}
 
+#comp2{
+  z-index: 0;
   display:none;
+
 }
 
 
 
-.dot {
+
+.dot1 {
   height: 25px;
   width: 25px;
-  background-color: #bbb;
+  background-color: #46B974;
   border-radius: 50%;
   display: inline-block;
 }
 
-.plus {
-  height: 172.5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.dot2 {
+  height: 25px;
+  width: 25px;
+  background-color: #ff5566;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+#above {
+  height: 20px;
+  margin-left: 325px;
+  z-index: 0;
+}
+
+#plus {
+
+  position: absolute;
+  z-index: 0;
+  background-color: white;
+  height: auto;
+  border: 0px;
+}
+
+
+.fa-plus {
+  z-index: 0;
+
+  color: #404040;
 }

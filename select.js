@@ -26,7 +26,7 @@
  *
  ******************************************************************************/
 
-'use strict';
+
 
 const oracledb = require('oracledb');
 const dbConfig = require('./dbconfig.js');
@@ -39,7 +39,13 @@ const dbConfig = require('./dbconfig.js');
 //
 // oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
-async function run() {
+
+var globalVariable={
+  x: 0
+};
+
+
+async function queryData() {
 
   let connection;
 
@@ -47,8 +53,6 @@ async function run() {
     // Get a non-pooled connection
 
     connection = await oracledb.getConnection(dbConfig);
-
-
 
     // The statement to execute
     const sql =
@@ -60,19 +64,8 @@ async function run() {
     result = await connection.execute(sql);
     console.log("----- Banana Farmers (default ARRAY output format) --------");
     console.log(result.rows);
+    console.log(result.rows[0][2]);
 
-    // Optional Object Output Format
-    result = await connection.execute(
-      sql,
-      [], // A bind parameter is needed to disambiguate the following options parameter and avoid ORA-01036
-      {
-        outFormat: oracledb.OUT_FORMAT_OBJECT,     // outFormat can be OBJECT or ARRAY.  The default is ARRAY
-        // prefetchRows:   100,                    // internal buffer allocation size for tuning
-        // fetchArraySize: 100                     // internal buffer allocation size for tuning
-      }
-    );
-    console.log("----- Banana Farmers (default OBJECT output format) --------");
-    console.log(result.rows);
 
   } catch (err) {
     console.error(err);
@@ -88,4 +81,4 @@ async function run() {
   }
 }
 
-run();
+queryData();

@@ -1,5 +1,8 @@
+var y = document.getElementById("comp2");
+
 var lineChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    
     datasets: [{
         label: 'My First dataset',
         borderColor: window.chartColors.yellow,
@@ -35,6 +38,7 @@ var lineChartData = {
 
 window.onload = function() {
     var ctx = document.getElementById('canvas').getContext('2d');
+
     window.myLine = Chart.Line(ctx, {
         data: lineChartData,
         options: {
