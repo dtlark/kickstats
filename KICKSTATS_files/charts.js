@@ -9,7 +9,7 @@ var lineChartData = {
         backgroundColor: window.chartColors.yellow,
         fill: false,
         data: [
-            150,
+            50,
             randomScalingFactor(),
             randomScalingFactor(),
             randomScalingFactor(),

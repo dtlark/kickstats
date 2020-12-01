@@ -26,8 +26,6 @@
  *
  ******************************************************************************/
 
-
-
 const oracledb = require('oracledb');
 const dbConfig = require('./dbconfig.js');
 
@@ -38,12 +36,6 @@ const dbConfig = require('./dbconfig.js');
 // This script sets outFormat in the execute() call but it could be set here instead:
 //
 // oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
-
-
-var globalVariable={
-  x: 0
-};
-
 
 async function queryData() {
 
@@ -56,15 +48,15 @@ async function queryData() {
 
     // The statement to execute
     const sql =
-        `SELECT * FROM students`;
+        `select count(*) from kickstarter_project`;
 
     let result;
 
     // Default Array Output Format
     result = await connection.execute(sql);
-    console.log("----- Banana Farmers (default ARRAY output format) --------");
+    console.log("----- Example Query --------");
     console.log(result.rows);
-    console.log(result.rows[0][2]);
+    //console.log(result.rows[0][2]);
 
 
   } catch (err) {
