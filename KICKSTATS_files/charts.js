@@ -8,37 +8,24 @@ var lineChartData = {
         borderColor: window.chartColors.yellow,
         backgroundColor: window.chartColors.yellow,
         fill: false,
-        data: [
-            50,
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-        ],
+        data: [],
         yAxisID: 'y-axis-1',
-    }, {
-        label: 'My Second dataset',
-        borderColor: window.chartColors.orange,
-        backgroundColor: window.chartColors.orange,
-        fill: false,
-        data: [
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor(),
-            randomScalingFactor()
-        ],
-        yAxisID: 'y-axis-2'
     }]
 };
 
-window.onload = function() {
-    var ctx = document.getElementById('canvas').getContext('2d');
+window.onload = () => {
+    fetch("/query").then(result=>result.json()).then(data =>{
+        //lineChartData.datasets[0].data.push(data);
+        for(let i = 0; i < data.length; i++){
+            lineChartData.datasets[0].data.push(data[i][0]);
+        }
+        
+        drawGraph();
+    });
+};
 
+function drawGraph(){
+    const ctx = document.getElementById('canvas').getContext('2d');
     window.myLine = Chart.Line(ctx, {
         data: lineChartData,
         options: {
@@ -55,21 +42,11 @@ window.onload = function() {
                     display: true,
                     position: 'left',
                     id: 'y-axis-1',
-                }, {
-                    type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-                    display: true,
-                    position: 'right',
-                    id: 'y-axis-2',
-
-                    // grid line settings
-                    gridLines: {
-                        drawOnChartArea: false, // only want the grid lines for one axis to show up
-                    },
                 }],
             }
         }
     });
-};
+}
 
 
 /*

@@ -10,7 +10,12 @@
     <script src="/static/utils.js.download"></script>
 	<script src="/static/charts.js"></script>
 	<script src="/static/script.js"></script>
-	<script src="/select.js"></script>
+	<!--<script src="/select.js"></script> -->
+	<script>
+		function query() {
+			fetch("/totalLines").then(result=>result.json()).then(data => alert(data));
+		}
+	</script>
 	
   <style type="text/css">/* Chart.js */
 @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
@@ -138,7 +143,7 @@
 	<div style="width:75%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
 		<canvas id="canvas" style="display: block; height: 343px; width: 687px;" width="1202" height="600" class="chartjs-render-monitor"></canvas>
 	</div>
-	<button id="randomizeData" onclick="queryData()">Randomized Data</button>
+	<button onclick="query()">Total Tuples</button>
 	</center>
 </div>
 		

@@ -37,7 +37,8 @@ const dbConfig = require('./dbconfig.js');
 //
 // oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
-async function queryData() {
+
+exports.queryData  = async (sql) => {
 
   let connection;
 
@@ -46,9 +47,7 @@ async function queryData() {
 
     connection = await oracledb.getConnection(dbConfig);
 
-    // The statement to execute
-    const sql =
-        `select count(*) from kickstarter_project`;
+        
 
     let result;
 
@@ -57,6 +56,7 @@ async function queryData() {
     console.log("----- Example Query --------");
     console.log(result.rows);
     //console.log(result.rows[0][2]);
+    return result.rows;
 
 
   } catch (err) {
@@ -72,5 +72,3 @@ async function queryData() {
     }
   }
 }
-
-queryData();
