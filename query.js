@@ -53,7 +53,7 @@ exports.queryData  = async (sql) => {
 
     // Default Array Output Format
     result = await connection.execute(sql);
-    console.log("----- Example Query --------");
+    console.log("----- Query Results --------");
     console.log(result.rows);
     //console.log(result.rows[0][2]);
     return result.rows;

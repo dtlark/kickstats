@@ -187,18 +187,18 @@ h4 {
 .comparisons {
   padding: 5px;
   background-color: #EAECEC;
-  width: 808px;
-  height: 270px;
+  width: 1000px;
+  height: auto;
     margin: auto;
 
 }
 .comparison1 {
 border: 1px solid #b0b0b0;
-margin-left: 150px;
+margin-left: 100px;
   padding: 25px;
   height: auto;
   background-color: #fff;
-      width: 350px;
+      width: 750px;
  position: relative;
       z-index: 5 !important;
 
@@ -333,4 +333,41 @@ z-index: 5;
   z-index: 0;
 
   color: #404040;
+}
+
+
+#submit {
+	margin: auto;
+	border: 2px;
+	border-color: #46B974;
+	background-color: #46B974;
+	color: white;
+	border-radius: 5px;
+	padding: 10px;
+	display: block;
+	width: 20%;
+	transition: 0.3s;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+#submit:hover {
+
+  color: #46B974;  
+  background-color: #fff;
+  border-radius: 5px;
+  border-color: #46B974;
+  cursor: pointer;
+}
+
+
+
+#dropdown {
+  float:left;
+ 
+
+}
+
+#footer {
+  clear: both;			
 }
