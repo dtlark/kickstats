@@ -15,6 +15,14 @@
 		function query() {
 			fetch("/totalLines").then(result=>result.json()).then(data => alert(data));
 		}
+
+		function executeSQL(){
+			const interests = document.getElementById("int");
+			const categories = document.getElementById("cat");
+			const dateStart = document.getElementById("start");
+			const dateEnd = document.getElementById("end");
+			console.log(dateEnd);
+		}
 	</script>
 	
   <style type="text/css">/* Chart.js */
@@ -76,9 +84,7 @@
 			to
 			<input type="date" id="end" name="end" value="2018-07-22" min="2009-04-21" max="2018-01-02">
 		 </div>
-		   <span class="dot2"></span>
-
-	</div>
+		</div>
 
 	
 </div>
@@ -123,8 +129,9 @@
 				<input type="date" id="start" name="start" value="2018-07-22" min="2009-04-21" max="2018-01-02">
 				to
 			    <input type="date" id="end" name="end" value="2018-07-22" min="2009-04-21" max="2018-01-02">
-		 	</div>
-		 	<span class="dot1"></span>
+			 </div>
+			 <hr>
+			<button onclick="executeSQL()">Submit</button>
 		   	  
 		</div>
 
@@ -143,7 +150,7 @@
 	<div style="width:75%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
 		<canvas id="canvas" style="display: block; height: 343px; width: 687px;" width="1202" height="600" class="chartjs-render-monitor"></canvas>
 	</div>
-	<button onclick="query()">Total Tuples</button>
+	<button onclick="query()">Total</button>
 	</center>
 </div>
 		
