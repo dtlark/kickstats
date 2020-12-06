@@ -1,6 +1,6 @@
 const express = require ('express');
 const path = require ('path');
-const select = require('./select');
+const select = require('./query');
 
 const app = express();
 app.use('/static', express.static('KICKSTATS_files'))

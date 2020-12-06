@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "select": "./select.js",
+    "select": "./query.js",
     "express": "^4.17.1",
     "nodemon": "^2.0.6",
     "oracledb": "^5.0.0"
