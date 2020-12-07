@@ -10,6 +10,7 @@ app.get('/', (req, res) => {
     
 });
 
+
 app.get('/query', (req, res) => {
     select.queryData(`select * from(select average_donation from pledge order by average_donation desc) where rownum < 8`).then(result=>{
         res.json(result);
@@ -21,4 +22,9 @@ app.get('/totalLines', (req, res) => {
         res.send(result[0][0] + '');
     });
 });
+
+
+
+
+
 app.listen(3000);

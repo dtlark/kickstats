@@ -1,13 +1,37 @@
-var y = document.getElementById("comp2");
+var y = document.getElementById("comp1");
+
+
+function query() {
+    fetch("/totalLines").then(result=>result.json()).then(data => alert(data));
+}
+
+function executeSQL(){
+
+    var interests = document.getElementById("int");
+    var categories = document.getElementById("cat");
+    var dateStart = document.getElementById("start");
+    var dateEnd = document.getElementById("end");
+
+    console.log(dateStart.value);
+
+    fetch("/query").then(result=>result.json()).then(data =>{
+        //lineChartData.datasets[0].data.push(data);
+        for(let i = 0; i < data.length; i++){
+            lineChartData.datasets[0].data.push(data[i][0]);
+        }
+        drawGraph();
+    });
+
+}
 
 var lineChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     
     datasets: [{
-        label: 'My First dataset',
-        borderColor: window.chartColors.yellow,
-        backgroundColor: window.chartColors.yellow,
-        fill: false,
+        label: 'Interest',
+        borderColor: window.chartColors.green,
+        backgroundColor: window.chartColors.green,
+        fill: true,
         data: [],
         yAxisID: 'y-axis-1',
     }]
@@ -24,7 +48,7 @@ window.onload = () => {
     });
 };
 
-function drawGraph(){
+function drawGraph() {
     const ctx = document.getElementById('canvas').getContext('2d');
     window.myLine = Chart.Line(ctx, {
         data: lineChartData,
@@ -47,16 +71,3 @@ function drawGraph(){
         }
     });
 }
-
-
-/*
-document.getElementById('randomizeData').addEventListener('click', function() {
-    lineChartData.datasets.forEach(function(dataset) {
-        dataset.data = dataset.data.map(function() {
-            return randomScalingFactor();
-        });
-    });
-
-    window.myLine.update();
-});
-*/
