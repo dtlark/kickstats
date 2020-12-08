@@ -78,6 +78,11 @@ window.onload = () => {
 
 function drawGraph() {
     const ctx = document.getElementById('canvas').getContext('2d');
+    
+    if (window.myLine){
+    window.myLine.destroy();
+    }
+
     window.myLine = Chart.Line(ctx, {
         data: lineChartData,
         options: {
