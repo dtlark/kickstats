@@ -210,6 +210,15 @@ margin-left: 100px;
    
 }
 
+.dates {
+  margin-left: 180px;
+}
+.cats {
+  margin-left: 100px;
+}
+.cats2 {
+  margin-left: 0px;
+}
 .comparison2 {
   border: 1px solid #b0b0b0;
   padding: 25px;
