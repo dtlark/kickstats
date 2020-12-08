@@ -266,12 +266,20 @@ border: 1px solid #b0b0b0;
 }
 
 
-#cat, #int {
+#cat {
   width: 100px;
   margin: 10px;
   text-align: center;
   cursor: pointer;
 }
+
+#int {
+  width: 250px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
 
 .flex-container {
   z-index: 0;

@@ -1,3 +1,14 @@
+
+window.chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(70, 185, 116)',
+	blue: 'rgb(70, 185, 116)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
+};
+
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 let y = document.getElementById("comp1");
@@ -62,14 +73,7 @@ var lineChartData = {
 };
 
 window.onload = () => {
-    fetch("/query").then(result => result.json()).then(data => {
-        //lineChartData.datasets[0].data.push(data);
-        for (let i = 0; i < data.length; i++) {
-            lineChartData.datasets[0].data.push(data[i][0]);
-        }
-
-        drawGraph();
-    });
+    executeSQL();
 };
 
 function drawGraph() {
