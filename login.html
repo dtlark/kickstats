@@ -15,13 +15,15 @@
 		<br>
 		<br>
 		<br>
-		<input type="email" placeholder="USERNAME" id="_email">
-		<input type="password" placeholder="PASSWORD" id="_password">
+		<form method='post' action='/'>
+		<input name="username" placeholder="USERNAME" id="_username" required/>
+		<input name="password" placeholder="PASSWORD" id="_password" required/>
 		<br>
-		<button onclick="login()">LOG IN</button>
+		<input type='submit' style="cursor: pointer;" id="login"/>
+		</form>
 		<br>
 		<br>
-		<u onclick="signup()" style="cursor: pointer;">Sign Up</u>
+		<u onclick="signup()" ">Sign Up</u>
 		</center>
 	</div>
 

@@ -9,9 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "select": "./query.js",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "nodemon": "^2.0.6",
-    "oracledb": "^5.0.0"
+    "oracledb": "^5.0.0",
+    "select": "./query.js"
   }
 }

@@ -99,7 +99,7 @@ h4 {
 	margin-bottom: 20px;
 }
 
-.main button {
+.main button, #login {
 	margin: auto;
 	border: 2px;
 	border-color: #46B974;
@@ -114,7 +114,7 @@ h4 {
 	font-weight: 700;
 }
 
-.main button:hover {
+.main button:hover, #login:hover {
 
     color: #46B974;  
     background-color: #fff;
@@ -370,4 +370,9 @@ z-index: 5;
 
 #footer {
   clear: both;			
+}
+
+#logoutform {
+float :right;
+
 }

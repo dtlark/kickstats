@@ -1,15 +1,99 @@
 const express = require ('express');
+const session = require ('express-session');
 const path = require ('path');
 const select = require('./query');
 
+const bodyParser = require('body-parser');
 const app = express();
-app.use('/static', express.static('KICKSTATS_files'))
-app.use(express.json());
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/main.html'));
-    
+
+
+//-----------------------------------------------------------
+
+const users = [
+    {id: 1, username: 'dtlark', password: 'databasepw'},
+    {id: 2, username: 'barry', password: 'barryspw'}
+]
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+
+app.use(session({
+    name: 'sid',
+    resave: false,
+    saveUninitialized: false,
+    secret: 'secretpassphrase',
+    cookie: {
+        maxAge: 100*60*60*2,
+        sameSite: true
+        //secure: true,
+    }
+}))
+
+const redirectLogin = (req, res, next) => {
+    if (!req.session.userId) {
+        res.redirect('/')
+    } else {
+        next()
+    }
+}
+
+const redirectMain = (req, res, next) => {
+    if (req.session.userId) {
+        res.redirect('/main')
+    } else {
+        next()
+    }
+}
+
+app.get('/', redirectMain, (req, res) => {
+    const {userId} = req.session
+    res.sendFile(path.join(__dirname, '/login.html'));
+
 });
 
+app.get('/main', redirectLogin, (req, res) => {
+    res.sendFile(path.join(__dirname, '/main.html'));
+})
+
+
+app.post('/', redirectMain, (req, res) => {
+
+    const {username, password} = req.body
+
+    if (username && password) {
+    const user = users.find(user => user.username === username && user.password === password)
+    if (user) {
+        req.session.userId = user.id
+        return res.redirect('/main')
+    }
+    }
+    res.redirect('/')
+})
+
+app.post('/logout', redirectLogin, (req, res) => {
+
+    req.session.destroy(err => {
+if (err) {
+    return res.redirect('/main')
+}
+res.clearCookie('sid')
+res.redirect('/')
+
+    })
+})
+
+
+//----------------------------------------------------
+
+app.use('/static', express.static('KICKSTATS_files'))
+app.use(express.json());
+
+/*
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/main.html'));
+});
+*/
 
 app.post('/query', (req, res) => {
     console.log(req.body);
@@ -164,10 +248,6 @@ app.post('/query', (req, res) => {
 
     }
 
-
-
-
-
     select.queryData(sql).then(result=>{
         res.json(result);
     });
@@ -178,9 +258,5 @@ app.get('/totalLines', (req, res) => {
         res.send(result[0][0] + '');
     });
 });
-
-
-
-
 
 app.listen(3000);
