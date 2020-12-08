@@ -1,11 +1,13 @@
-var y = document.getElementById("comp1");
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+let y = document.getElementById("comp1");
 
 
 function query() {
-    fetch("/totalLines").then(result=>result.json()).then(data => alert(data));
+    fetch("/totalLines").then(result => result.json()).then(data => alert(data));
 }
 
-function executeSQL(){
+function executeSQL() {
 
     var interests = document.getElementById("int");
     var categories = document.getElementById("cat");
@@ -13,20 +15,42 @@ function executeSQL(){
     var dateEnd = document.getElementById("end");
 
     console.log(dateStart.value);
-
-    fetch("/query").then(result=>result.json()).then(data =>{
+    lineChartData.labels = [];
+    fetch("/query", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({interests:interests.value, categories:categories.value, dateStart:dateStart.value, dateEnd:dateEnd.value}) // body data type must match "Content-Type" header
+    }).then(result => result.json()).then(data => {
         //lineChartData.datasets[0].data.push(data);
-        for(let i = 0; i < data.length; i++){
+        lineChartData.datasets[0].data = [];
+        for (let i = 0; i < data.length; i++) {
             lineChartData.datasets[0].data.push(data[i][0]);
         }
+        createLables(Number.parseInt(dateStart.value.split('-')[0]), Number.parseInt(dateStart.value.split('-')[1]),
+            Number.parseInt(dateEnd.value.split('-')[0]), Number.parseInt(dateEnd.value.split('-')[1]));
         drawGraph();
     });
 
 }
 
+function createLables(startDateYear, startDateMonth, endDateYear, endDateMonth) {
+    const numMonths = (((endDateYear - startDateYear) * 12) - startDateMonth) + endDateMonth;
+    lineChartData.labels = [];
+    for (let i = 0; i < numMonths; i++) {
+        lineChartData.labels.push(MONTHS[(i + startDateMonth - 1) % 12]);
+    }
+}
+
 var lineChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    
+    labels: [],
+
     datasets: [{
         label: 'Interest',
         borderColor: window.chartColors.green,
@@ -38,12 +62,12 @@ var lineChartData = {
 };
 
 window.onload = () => {
-    fetch("/query").then(result=>result.json()).then(data =>{
+    fetch("/query").then(result => result.json()).then(data => {
         //lineChartData.datasets[0].data.push(data);
-        for(let i = 0; i < data.length; i++){
+        for (let i = 0; i < data.length; i++) {
             lineChartData.datasets[0].data.push(data[i][0]);
         }
-        
+
         drawGraph();
     });
 };
